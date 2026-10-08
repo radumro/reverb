@@ -9,6 +9,7 @@ use Laravel\Reverb\Contracts\ApplicationProvider;
 use Laravel\Reverb\Contracts\Connection;
 use Laravel\Reverb\Protocols\Pusher\Channels\Channel;
 use Laravel\Reverb\Protocols\Pusher\Channels\ChannelBroker;
+use Laravel\Reverb\Protocols\Pusher\Channels\ChannelConnection;
 use Laravel\Reverb\Protocols\Pusher\Contracts\ChannelManager as ChannelManagerInterface;
 
 class ArrayChannelManager implements ChannelManagerInterface
@@ -18,14 +19,14 @@ class ArrayChannelManager implements ChannelManagerInterface
     /**
      * The underlying array of applications and their channels.
      *
-     * @var array<string, array<string, array<string, \Laravel\Reverb\Protocols\Pusher\Channels\Channel>>>
+     * @var array<string, array<string, array<string, Channel>>>
      */
     protected $applications = [];
 
     /**
      * The application instance.
      *
-     * @var \Laravel\Reverb\Application
+     * @var Application
      */
     protected $application;
 
@@ -40,7 +41,7 @@ class ArrayChannelManager implements ChannelManagerInterface
     /**
      * Get all the channels.
      *
-     * @return array<string, \Laravel\Reverb\Protocols\Pusher\Channels\Channel>
+     * @return array<string, Channel>
      */
     public function all(): array
     {
@@ -74,7 +75,7 @@ class ArrayChannelManager implements ChannelManagerInterface
     /**
      * Get all of the connections for the given channels.
      *
-     * @return array<string, \Laravel\Reverb\Protocols\Pusher\Channels\ChannelConnection>
+     * @return array<string, ChannelConnection>
      */
     public function connections(?string $channel = null): array
     {
@@ -114,7 +115,7 @@ class ArrayChannelManager implements ChannelManagerInterface
     /**
      * Get the channels for the application.
      *
-     * @return \Laravel\Reverb\Protocols\Pusher\Channels\Channel|array<string, \Laravel\Reverb\Protocols\Pusher\Channels\Channel>
+     * @return Channel|array<string, Channel>
      */
     public function channels(?string $channel = null): Channel|array|null
     {

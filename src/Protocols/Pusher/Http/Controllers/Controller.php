@@ -57,7 +57,7 @@ abstract class Controller
     /**
      * Set the Reverb application instance for the incoming request's application ID.
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws HttpException
      */
     protected function setApplication(?string $appId): Application
     {
@@ -83,7 +83,7 @@ abstract class Controller
     /**
      * Verify the Pusher authentication signature.
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws HttpException
      */
     protected function verifySignature(RequestInterface $request): void
     {

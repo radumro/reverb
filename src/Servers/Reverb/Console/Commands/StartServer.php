@@ -4,6 +4,7 @@ namespace Laravel\Reverb\Servers\Reverb\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
+use Laravel\Pulse\Pulse;
 use Laravel\Reverb\Application;
 use Laravel\Reverb\Contracts\ApplicationProvider;
 use Laravel\Reverb\Contracts\Logger;
@@ -133,12 +134,12 @@ class StartServer extends Command implements SignalableCommandInterface
      */
     protected function ensurePulseEventsAreCollected(LoopInterface $loop, int $interval): void
     {
-        if (! $this->laravel->bound(\Laravel\Pulse\Pulse::class)) {
+        if (! $this->laravel->bound(Pulse::class)) {
             return;
         }
 
         $loop->addPeriodicTimer($interval, function () {
-            $this->laravel->make(\Laravel\Pulse\Pulse::class)->ingest();
+            $this->laravel->make(Pulse::class)->ingest();
         });
     }
 

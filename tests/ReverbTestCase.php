@@ -2,6 +2,7 @@
 
 namespace Laravel\Reverb\Tests;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Str;
 use Laravel\Reverb\ServerProviderManager;
 use Laravel\Reverb\Servers\Reverb\Contracts\PubSubProvider;
@@ -40,7 +41,7 @@ class ReverbTestCase extends TestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param  Application  $app
      */
     protected function defineEnvironment($app): void
     {
@@ -93,7 +94,7 @@ class ReverbTestCase extends TestCase
      */
     protected function resetFiber(): void
     {
-        $fiber = new SimpleFiber();
+        $fiber = new SimpleFiber;
         $fiberRef = new ReflectionObject($fiber);
         $scheduler = $fiberRef->getProperty('scheduler');
         $scheduler->setAccessible(true);
